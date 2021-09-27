@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../淘宝搜索/css/bootstrap.min.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="../../template-web.js"></script>
+</head>
+
+<body>
+    <div class="navbar-form pull-left">
+        <input type="text" style="width: 200px;" id="aa">
+        <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+    <div class="suggest-list"></div>
+    <script type="text/html" id="bb">
+        {{each result}}
+        <div class="suggest-value"> {{$value[0]}}
+        </div> {{/each}}
+    </script>
+    <script>
+        $(function() {
+            var timer = null;
+
+            function abc(keywords) {
+                timer = setTimeout(function() {
+                    acc(keywords);
+                }, 500)
+            }
+            var huancun = {};
+            $('#aa').on('keyup', function() {
+                clearTimeout(timer);
+                let keywords = $(this).val().trim();
+                if (keywords.length <= 0) {
+                    // $(this).val('');
+                    return $('.suggest-list').empty().hide();
+                };
+                if (huancun[keywords]) {
+                    return abb(huancun[keywords])
+                }
+                abc(keywords);
+            })
+
+            function acc(kb) {
+                $.ajax({
+                    dataType: 'jsonp',
+                    url: 'http://suggest.taobao.com/sug?q=' + kb,
+                    success: function(res) {
+                        console.log(res);
+                        abb(res)
+                    }
+                })
+            }
+            // 渲染ui结构
+            function abb(res) {
+                if (res.result.length <= 0) return $('.suggest-list').empty().hide();
+                var htmlstr = template('bb', res);
+                var k = $('#aa').val().trim();
+                huancun[k] = res;
+                $('.suggest-list').html(htmlstr).show();
+            }
+        })
+    </script>
+</body>
+
+</html>

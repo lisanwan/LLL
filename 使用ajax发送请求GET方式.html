@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery.min.js"></script>
+</head>
+
+<body>
+    <button id="aa">2455</button>
+    <script>
+        $('#aa').on('click', function() {
+            alert(4);
+            $.ajax({
+                headers: {
+                    cookie: 'UM_distinctid=17bc56219bbfc-015dcae1aaedd9-49515972-4b6a2-17bc56219bc4b; Hm_lvt_63a046e76ef0dcf16db7a73218ace1ba=1631111822; CNZZDATA1278765292=244126420-1631095365-%7C1631974536; Hm_lpvt_63a046e76ef0dcf16db7a73218ace1ba=1631981821; SERVERID=2543053d3c22fde83e755ca8751fa609|1631981872|1631979916'
+                },
+
+                type: 'post',
+                async: true,
+                xhrFields: {
+                    withCredentials: true
+                },
+                url: 'http://bbs-tmp.picovr.com/api/signIn/save',
+                data: {
+                    id: 52671
+                },
+                dataType: "jsonp",
+                success: function(res) {
+                    console.log(res);
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

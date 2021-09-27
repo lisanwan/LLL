@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../jquery.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        div {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="yd">11</div>
+    <script>
+        $(function() {
+            var flag = 1;
+            $(document).on('click', function(e) {
+                if (flag != 1) return
+                flag = 0;
+                setTimeout(function() {
+                    $('#yd').css('left', e.pageX + 'px').css('top', e.pageY + 'px')
+                    console.log(11);
+                    return flag = 1;
+                }, 2000)
+
+            })
+        })
+    </script>
+</body>
+
+</html>
